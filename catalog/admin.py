@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Tool, Host, ToolType, ToolInstance
+
+admin.site.register(Tool)
+admin.site.register(Host)
+admin.site.register(ToolType)
+admin.site.register(ToolInstance)

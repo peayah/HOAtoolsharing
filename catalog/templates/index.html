@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h3>PELLEGRINO</h3>
+  <h1>HOA Tool Shed</h1>
+  <p>Welcome to Pellegrino HOA tool sharing website!</p>
+
+    <h2>Available Tools</h2>
+  <p>The Tool Shed has the following tool counts:</p>
+  <ul>
+    <li><strong>Tools:</strong> {{ num_books }}</li>
+    <li><strong>Copies:</strong> {{ num_instances }}</li>
+    <li><strong>Currently Available Tools:</strong> {{ num_instances_available }}</li>
+    <li><strong>Hosts:</strong> {{ num_authors }}</li>
+  </ul>
+
+
+{% endblock %}

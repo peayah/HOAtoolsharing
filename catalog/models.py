@@ -30,6 +30,14 @@ class Tool(models.Model):
     # ToolType class has already been defined so we can specify the object above.
     tool_type = models.ManyToManyField(ToolType, help_text='Select a type for this tool')
 
+    def display_tool_type(self):
+        """Create a string for the ToolType.
+        This is required to display genre in Admin."""
+        return ', '.join(tool_type.name for tool_type in self.tool_type.all()[:3])
+
+    display_tool_type.short_description = 'Tool Type'
+
+
     def __str__(self):
         """String for representing the Model object."""
         return self.tool
@@ -75,7 +83,7 @@ class Host(models.Model):
     """Model representing a host."""
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    house_number = models.DateField('Died', null=True, blank=True)
+    house_number = models.IntegerField('House Number', null=True, blank=True)
 
     STREET = (
         ('r', 'Remmington Avenue'),

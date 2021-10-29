@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>{{ host.first_name }} {{ host.last_name }}</h1>
+    <p><strong>Address:</strong> {{ host.house_number }} {{ host.street }}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Tools:</h4>
+    {% for copy in host.tool_set.all %}
+     <p> <strong>{{ copy.tool }}</strong> ({{ copy.tool_type.all|join:", " }})</p>
+              <p>{{ copy.description }}</p>
+
+     {% endfor %}
+  </div>
+{% endblock %}

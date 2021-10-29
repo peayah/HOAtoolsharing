@@ -1,0 +1,15 @@
+.container-fluid {
+    padding: 2em;
+}
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    position:absolute;
+    z-index:0;
+    opacity: 0.15;
+    height:100%
+}

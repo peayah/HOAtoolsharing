@@ -3,5 +3,12 @@ from . import views
 
 # define the (empty) imported urlpatterns
 urlpatterns = [
+    path('', views.index, name='index'),
+
+    path('tools/', views.ToolListView.as_view(), name='tools'),
+    path('tool/<int:pk>', views.ToolDetailView.as_view(), name='tool-detail'),
+
+    path('hosts/', views.HostListView.as_view(), name='hosts'),
+    path('host/<int:pk>', views.HostDetailView.as_view(), name='host-detail'),
 
 ]

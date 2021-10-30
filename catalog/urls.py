@@ -11,4 +11,6 @@ urlpatterns = [
     path('hosts/', views.HostListView.as_view(), name='hosts'),
     path('host/<int:pk>', views.HostDetailView.as_view(), name='host-detail'),
 
+    path('mytools/', views.LoanedToolsByUserListView.as_view(), name='my-borrowed'),
+
 ]

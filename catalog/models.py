@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse  # Used to generate URLs by reversing the URL patterns
 import uuid  # Required for unique tool instances
+from django.contrib.auth.models import User
+from datetime import date
 
 
 class ToolType(models.Model):
@@ -55,6 +57,7 @@ class ToolInstance(models.Model):
     tool = models.ForeignKey('Tool', on_delete=models.RESTRICT, null=True)
     purchased = models.DateField(null=True, blank=False)
     due_back = models.DateField(null=True, blank=True)
+    borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     LOAN_STATUS = (
         ('m', 'Maintenance'),
@@ -78,6 +81,11 @@ class ToolInstance(models.Model):
         """String for representing the Model object."""
         return f'{self.id} ({self.tool.tool})'
 
+    @property
+    def is_overdue(self):
+        if self.due_back and date.today() > self.due_back:
+            return True
+        return False
 
 class Host(models.Model):
     """Model representing a host."""

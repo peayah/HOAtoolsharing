@@ -3,6 +3,7 @@ from django.views import generic
 from .models import Tool, Host, ToolInstance, ToolType
 from django.shortcuts import get_object_or_404
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
@@ -68,3 +69,12 @@ def tool_detail_view(request, primary_key):
         raise Http404('Tool does not exist')
 
     return render(request, 'catalog/tool_detail.html', context={'tool': tool})
+
+class LoanedToolsByUserListView(LoginRequiredMixin,generic.ListView):
+    """Generic class-based view listing tools on loan to current user."""
+    model = ToolInstance
+    template_name ='catalog/toolinstance_list_borrowed_user.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return ToolInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')

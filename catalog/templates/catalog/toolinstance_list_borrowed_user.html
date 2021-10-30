@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Borrowed tools</h1>
+
+    {% if toolinstance_list %}
+    <ul>
+
+      {% for toolinst in toolinstance_list %}
+      <li class="{% if toolinst.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'tool-detail' toolinst.tool.pk %}">{{toolinst.tool.tool}}</a> ({{ toolinst.due_back }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>You have no borrowed tools at this time.</p>
+    {% endif %}
+{% endblock %}

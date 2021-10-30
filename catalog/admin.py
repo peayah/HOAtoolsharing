@@ -24,7 +24,7 @@ class ToolAdmin(admin.ModelAdmin):
 @admin.register(ToolInstance)
 class ToolInstanceAdmin(admin.ModelAdmin):
 
-    list_display = ('tool', 'status')
+    list_display = ('tool', 'status', 'borrower', 'due_back', 'id')
     list_filter = ('status', 'due_back')
 
     fieldsets = (
@@ -32,7 +32,7 @@ class ToolInstanceAdmin(admin.ModelAdmin):
             'fields': ('id', 'tool', 'purchased')
         }),
         ('Availability', {
-            'fields': ('status', 'due_back')
+            'fields': ('status', 'due_back','borrower')
         }),
     )
 

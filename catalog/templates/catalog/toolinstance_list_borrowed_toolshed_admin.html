@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Tools borrowed by members</h1>
+
+    {% if toolinstance_list %}
+    <ul>
+
+      {% for toolinst in toolinstance_list %}
+      <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'tool-detail' toolinst.tool.pk %}">{{toolinst.tool.tool}}</a> ({{ toolinst.due_back }}) - {{ toolinst.borrower }}
+
+        {% if perms.catalog.can_mark_returned %}
+            - <a href="{% url 'renew-tool-toolshed-admin' toolinst.id %}">Renew</a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>No tools currently borrowed.</p>
+    {% endif %}
+{% endblock %}

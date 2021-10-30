@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from datetime import date
 
 
+
 class ToolType(models.Model):
 
     """Model representing a tool type."""
@@ -76,6 +77,9 @@ class ToolInstance(models.Model):
 
     class Meta:
         ordering = ['due_back']
+
+        permissions = (("can_mark_returned", "Set tool as returned"),)
+
 
     def __str__(self):
         """String for representing the Model object."""

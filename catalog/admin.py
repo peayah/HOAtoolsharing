@@ -21,11 +21,17 @@ class ToolAdmin(admin.ModelAdmin):
 
 
 # admin.site.register(ToolInstance)
+
 @admin.register(ToolInstance)
 class ToolInstanceAdmin(admin.ModelAdmin):
 
-    list_display = ('tool', 'status', 'borrower', 'due_back', 'id')
-    list_filter = ('status', 'due_back')
+    list_display = ('tool',
+                    'status',
+                    'borrower',
+                    'due_back',
+                    'id')
+    list_filter = ('status',
+                   'due_back')
 
     fieldsets = (
         (None, {
@@ -36,4 +42,4 @@ class ToolInstanceAdmin(admin.ModelAdmin):
         }),
     )
 
-admin.site.register(ToolType)
+# admin.site.register(ToolType)

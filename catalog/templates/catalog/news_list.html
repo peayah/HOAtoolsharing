@@ -1,0 +1,42 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h2>HOA News</h2>
+  {% if news_list %}
+        <ul class="list-unstyled">
+            {% for news in news_list %}
+                {% if news.news_type == 'n' %}
+                <li>
+                    <p> <a href="{{ news.get_absolute_url }}">{{ news.title }}</a></p>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+  <h2>Workshops</h2>
+
+              <ul class="list-unstyled">
+            {% for news in news_list %}
+                {% if news.news_type == 'w' %}
+                <li>
+                    <p> <a href="{{ news.get_absolute_url }}">{{ news.title }}</a></p>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+  <h2>Neighbor to Neighbor</h2>
+
+              <ul class="list-unstyled">
+            {% for news in news_list %}
+                {% if news.news_type == 'a' %}
+                <li>
+                    <p> <a href="{{ news.get_absolute_url }}">{{ news.title }}</a></p>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+  {% else %}
+    <p>There are no news at this time.</p>
+  {% endif %}
+{% endblock %}

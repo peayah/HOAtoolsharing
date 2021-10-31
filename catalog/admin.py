@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Tool, Host, ToolType, ToolInstance
+from .models import Tool, Host, News, ToolInstance
 
 
 # admin.site.register(Host)
@@ -20,8 +20,13 @@ class ToolAdmin(admin.ModelAdmin):
     list_display = ('tool', 'host', 'description', 'display_tool_type')
 
 
-# admin.site.register(ToolInstance)
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ("title", "author","news_type", "pub_date", "end_date", "content")
+    fields = [( "title", "author", "news_type", "pub_date", "end_date","content")]
 
+
+# admin.site.register(ToolInstance)
 @admin.register(ToolInstance)
 class ToolInstanceAdmin(admin.ModelAdmin):
 
@@ -38,8 +43,6 @@ class ToolInstanceAdmin(admin.ModelAdmin):
             'fields': ('id', 'tool', 'purchased')
         }),
         ('Availability', {
-            'fields': ('status', 'due_back','borrower')
+            'fields': ('status', 'due_back', 'borrower')
         }),
     )
-
-# admin.site.register(ToolType)

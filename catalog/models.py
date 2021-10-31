@@ -5,6 +5,39 @@ from django.contrib.auth.models import User
 from datetime import date
 
 
+class News(models.Model):
+    title = models.CharField(max_length=150)
+
+    author = models.ForeignKey('Host', on_delete=models.SET_NULL, null=True)
+
+    pub_date = models.DateField(null=True, blank=True)
+
+    end_date = models.DateField(null=True, blank=True)
+
+    content = models.TextField(max_length=1000)
+
+    def get_absolute_url(self):
+        """Returns the url to access a detail record for this tool."""
+        return reverse('news-detail', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.title
+
+    NEWS_TYPE = (
+        ('n', 'News'),
+        ('a', 'Article'),
+        ('w', 'Workshop'),
+    )
+
+    news_type = models.CharField(
+        max_length=1,
+        choices=NEWS_TYPE,
+        blank=True,
+        default='n',
+        help_text='News Type',
+    )
+
 
 class ToolType(models.Model):
 
@@ -32,6 +65,8 @@ class Tool(models.Model):
     # ManyToManyField used because tool type can contain many tools.
     # ToolType class has already been defined so we can specify the object above.
     tool_type = models.ManyToManyField(ToolType, help_text='Select a type for this tool')
+
+
 
     def display_tool_type(self):
         """Create a string for the ToolType.
@@ -121,5 +156,5 @@ class Host(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return f'{self.last_name}, {self.first_name}'
+        return f'{self.first_name} {self.last_name} '
 

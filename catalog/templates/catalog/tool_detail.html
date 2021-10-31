@@ -1,25 +1,23 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>{{ tool.tool }}</h1>
+  <h2>{{ tool.tool }}</h2>
 
-  <p><strong>Host:</strong> <a href="">{{ tool.host }}</a></p> <!-- host detail link not yet defined -->
+  <p><strong>Pick up at:</strong> <a href="">{{ tool.host }}</a></p> <!-- host detail link not yet defined -->
   <p><strong>Description:</strong> {{ tool.description }}</p>
   <p><strong>Type:</strong> {{ tool.tool_type.all|join:", " }}</p>
 
   <div style="margin-left:20px;margin-top:20px">
-    <h4>Copies</h4>
+    <h4>Availability</h4>
 
     {% for copy in tool.toolinstance_set.all %}
       <hr>
-      <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">
+      <p><span class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">
         {{ copy.get_status_display }}
-      </p>
+      </span>
       {% if copy.status != 'a' %}
-        <p><strong>Due to be returned:</strong> {{ copy.due_back }}</p>
+          -  <strong>Due:</strong> {{ copy.due_back }}</p>
       {% endif %}
-      <p><strong>Purchased:</strong> {{ copy.purchased }}</p>
-      <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
-    {% endfor %}
+       {% endfor %}
   </div>
 {% endblock %}

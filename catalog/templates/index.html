@@ -1,16 +1,29 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h3>PELLEGRINO</h3>
-    <h1>HOA Tool Shed</h1>
-    <p>Welcome to Pellegrino HOA tool sharing website!</p>
+    <h2>Latest news</h2>
+    <ul class="list-unstyled">
+        {% for item in news_articles %}
+            <li>
+                <h4> <a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4>
+                <p>{{ item.content }}</p>
+            </li>
 
-    <h2>Available Tools</h2>
-    <p>The Tool Shed has the following tool counts:</p>
-    <ul>
-        <li><strong>Tools:</strong> {{ num_tools }}</li>
-        <li><strong>Copies:</strong> {{ num_instances }}</li>
-        <li><strong>Currently Available Tools:</strong> {{ num_instances_available }}</li>
-        <li><strong>Hosts:</strong> {{ num_authors }}</li>
+        {% endfor %}
     </ul>
+
+    <h2>Tool Sharing</h2>
+    <p>We all have a garage, shed and/or workroom filled with tools we got for a project
+        and then never needed again? Instead of each having our own lawn mower, snow
+        blower, leaf blower and extension ladders? That’s a lot of stuff, which takes up a
+        lot of space, and costs quite a bit of money! Before you buy more equipment for
+        your next house project, consider joining your neighbors tool sharing.</p>
+
+
+
+    <h3>Tool list</h3>
+    <p>The Tool Shed has <a href="{% url 'tools' %}">the following tools</a> in inventory.
+    </p>
+
+
 {% endblock %}

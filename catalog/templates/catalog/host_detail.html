@@ -1,15 +1,38 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>{{ host.first_name }} {{ host.last_name }}</h1>
-    <p><strong>Address:</strong> {{ host.house_number }} {{ host.street }}</p>
+    <h3 >{{ host.first_name }} {{ host.last_name }}</h3>
+
+    <p><strong>Address:</strong>
+        {{ host.house_number }}
+
+    {% if host.street == 'r' %}
+        {{ "Remmington Avenue" }}
+    {% endif %}
+
+    {% if host.street == 'o' %}
+        {{ "Ohlone Street" }}
+    {% endif %}
+
+    {% if host.street == 'a' %}
+        {{ "Asgaard Street" }}
+    {% endif %}
+
+    {% if host.street == 'd' %}
+        {{ "Dales Lane" }}
+    {% endif %}
+    </p>
 
   <div style="margin-left:20px;margin-top:20px">
-    <h4>Tools:</h4>
-    {% for copy in host.tool_set.all %}
-     <p> <strong>{{ copy.tool }}</strong> ({{ copy.tool_type.all|join:", " }})</p>
+    <h4>{{ host.first_name }} hosts the following tools:</h4>
+    {%  if host.tool_set.all %}
+        {% for copy in host.tool_set.all %}
+            <p><strong>{{ copy.tool }}</strong> ({{ copy.tool_type.all|join:", " }})</p>
               <p>{{ copy.description }}</p>
 
-     {% endfor %}
+        {% endfor %}
+  {% else %}
+        <p>{{ host.first_name }} has no tools listed currently.</p>
+  {% endif %}
   </div>
 {% endblock %}

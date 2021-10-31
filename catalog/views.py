@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Tool, Host, ToolInstance, ToolType
 from django.shortcuts import get_object_or_404
-from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 import datetime
 from django.contrib.auth.decorators import login_required, permission_required
@@ -10,16 +9,24 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from catalog.forms import RenewToolForm
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from catalog.models import Tool
+from catalog.models import Host
+from catalog.models import News
+
 
 def index(request):
     """View function for home page of site."""
+
+    recent_news = News.objects.all().filter(news_type__exact='n')
 
     # Generate counts of some of the main objects
     num_tools = Tool.objects.all().count()
     num_instances = ToolInstance.objects.all().count()
 
     # Available tools (status = 'a')
-    num_instances_available = ToolInstance.objects.filter(status__exact='a').count()
+    num_instances_available = ToolInstance.objects.filter(status__exact='a')
 
     # The 'all()' is implied by default.
     num_hosts = Host.objects.count()
@@ -33,10 +40,20 @@ def index(request):
         'num_instances': num_instances,
         'num_instances_available': num_instances_available,
         'num_authors': num_hosts,
+        'news_articles': recent_news
     }
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
+
+
+class NewsListView(generic.ListView):
+    model = News
+    paginate_by = 12
+
+
+class NewsDetailView(generic.DetailView):
+    model = News
 
 
 class HostListView(generic.ListView):
@@ -46,7 +63,6 @@ class HostListView(generic.ListView):
 
 class HostDetailView(generic.DetailView):
     model = Host
-
 
     def host_detail_view(request, primary_key):
         try:
@@ -65,7 +81,6 @@ class ToolListView(generic.ListView):
 class ToolDetailView(generic.DetailView):
     model = Tool
 
-
     def tool_detail_view(request, primary_key):
         try:
             tool = Tool.objects.get(pk=primary_key)
@@ -75,7 +90,7 @@ class ToolDetailView(generic.DetailView):
         return render(request, 'catalog/tool_detail.html', context={'tool': tool})
 
 
-class LoanedToolsByUserListView(LoginRequiredMixin,generic.ListView):
+class LoanedToolsByUserListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing tools on loan to current user."""
     model = ToolInstance
     template_name = 'catalog/toolinstance_list_borrowed_user.html'
@@ -83,6 +98,7 @@ class LoanedToolsByUserListView(LoginRequiredMixin,generic.ListView):
 
     def get_queryset(self):
         return ToolInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
+
 
 class LoanedToolsListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing tools on loan to current user."""
@@ -109,12 +125,13 @@ def renew_tool_toolshed_admin(request, pk):
 
         # Check if the form is valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            # process the data in form.cleaned_data as required
+            # (here we just write it to the model due_back field)
             tool_instance.due_back = form.cleaned_data['renewal_date']
             tool_instance.save()
 
             # redirect to a new URL:
-            return HttpResponseRedirect(reverse('all-borrowed') )
+            return HttpResponseRedirect(reverse('all-borrowed'))
 
     # If this is a GET (or any other method) create the default form.
     else:
@@ -127,3 +144,33 @@ def renew_tool_toolshed_admin(request, pk):
     }
 
     return render(request, 'catalog/tool_renew_toolshed_admin.html', context)
+
+
+class HostCreate(CreateView):
+    model = Host
+    fields = ['first_name', 'last_name', 'house_number', 'street']
+
+
+class HostUpdate(UpdateView):
+    model = Host
+    fields = '__all__'   # Not recommended (potential security issue if more fields added)
+
+
+class HostDelete(DeleteView):
+    model = Host
+    success_url = reverse_lazy('hosts')
+
+
+class ToolCreate(CreateView):
+    model = Tool
+    fields = ['tool', 'host', 'description', 'tool_type']
+
+
+class ToolUpdate(UpdateView):
+    model = Tool
+    fields = '__all__'  # Not recommended (potential security issue if more fields added)
+
+
+class ToolDelete(DeleteView):
+    model = Tool
+    success_url = reverse_lazy('tools')

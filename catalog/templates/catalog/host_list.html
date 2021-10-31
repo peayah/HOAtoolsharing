@@ -1,12 +1,12 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Host List</h1>
+  <h2>Host List</h2>
   {% if host_list %}
-  <ul>
+  <ul class="list-unstyled">
     {% for host in host_list %}
       <li>
-        <a href="{{ host.get_absolute_url }}">{{ host.first_name }} {{host.last_name}}</a>
+        <p><a href="{{ host.get_absolute_url }}">{{ host.first_name }} {{host.last_name}}</a></p>
       </li>
     {% endfor %}
   </ul>

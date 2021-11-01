@@ -3,6 +3,8 @@ body {
     background-color: #cccccc;
     background-position: center;
     background-size: cover;
+    border-bottom: 3rem solid #cd853f;
+
 }
 
 .jumbotron {
@@ -15,14 +17,19 @@ body {
     background-color: white;
     margin: 0 auto;
     padding: 2rem;
-    width: 80%
+    width: 70%;
+    min-height:37rem;
 }
 .sidenav {
     margin-top: 2rem;
     padding: 0;
     list-style: none;
-
 }
+
+ul {
+    margin-block-start: 0;
+}
+
 
 .nav-item {
     list-style: none;
@@ -35,11 +42,12 @@ img {
     height: 100%
 }
 
-@media screen and (max-width: 400px) {
+
+@media screen and (max-width: 500px) {
 
     body {
     background-image: none;
-    background-color: #ffffff;
+    background-color: white;
     background-size: cover;
     }
 

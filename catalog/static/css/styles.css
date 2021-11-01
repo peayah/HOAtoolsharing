@@ -52,12 +52,17 @@ img {
     }
 
    .jumbotron {
-    background-color: #cd853f;
-    color: #E5E4E2;
+        align: center;
+        background-color: #cd853f;
+        color: #E5E4E2;
    }
    
    .jumbotron h1 {
-    font-size: 1.35rem;
+            font-size: 1.35rem;
+   }
+
+    .jumbotron h3 {
+        font-size: 1rem;
    }
 
     .container-fluid {

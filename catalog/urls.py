@@ -40,5 +40,4 @@ urlpatterns = [
 
     path('tool/<int:pk>/delete/', views.ToolDelete.as_view(), name='tool-delete'),
 
-
 ]

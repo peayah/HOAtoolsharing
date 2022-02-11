@@ -8,7 +8,7 @@ body {
 }
 
 .jumbotron {
-    background-color: #cd853f;
+    background-color: darkorange;
     color: #E5E4E2;
     border-radius: 0;
 }
@@ -53,7 +53,7 @@ img {
 
    .jumbotron {
         align: center;
-        background-color: #cd853f;
+        background-color: darkorange;
         color: #E5E4E2;
    }
    

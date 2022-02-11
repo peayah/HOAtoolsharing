@@ -23,23 +23,23 @@ def index(request):
 
     # Generate counts of some of the main objects
     # num_tools = Tool.objects.all().count()
-    num_instances = ToolInstance.objects.all().count()
+    # num_instances = ToolInstance.objects.all().count()
 
     # Available tools (status = 'a')
-    num_instances_available = ToolInstance.objects.filter(status__exact='a')
+    # num_instances_available = ToolInstance.objects.filter(status__exact='a')
 
     # The 'all()' is implied by default.
-    num_hosts = Host.objects.count()
+    # num_hosts = Host.objects.count()
 
     # Number of visits to this view, as counted in the session variable.
-    num_visits = request.session.get('num_visits', 0)
-    request.session['num_visits'] = num_visits + 1
+    # num_visits = request.session.get('num_visits', 0)
+    # request.session['num_visits'] = num_visits + 1
 
     context = {
         # 'num_tools': num_tools,
-        'num_instances': num_instances,
-        'num_instances_available': num_instances_available,
-        'num_authors': num_hosts,
+        # 'num_instances': num_instances,
+        # 'num_instances_available': num_instances_available,
+        # 'num_authors': num_hosts,
         'news_articles': recent_news
     }
 

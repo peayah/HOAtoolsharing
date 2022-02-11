@@ -1,4 +1,4 @@
-#!/Users/piasmith/Desktop/py_data_projects/hoa_apps/toolexchange/env/bin/python3
+#!/Users/piasmith/Desktop/py_data_projects/hoa_apps/toolexchange/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

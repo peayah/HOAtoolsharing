@@ -130,7 +130,8 @@ class Host(models.Model):
     """Model representing a host."""
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    house_number = models.IntegerField('House Number', null=True, blank=True)
+    house_number = models.IntegerField('House Number')
+    # house_number = models.IntegerField('House Number', null=True, blank=True)
 
     STREET = (
         ('r', 'Remmington Avenue'),

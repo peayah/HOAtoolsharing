@@ -1,0 +1,80 @@
+body {
+    background-image: url("../images/toolcollage.jpeg");
+    background-color: #cccccc;
+    background-position: center;
+    background-size: cover;
+    border-bottom: 3rem solid #cd853f;
+
+}
+
+.jumbotron {
+    background-color: darkorange;
+    color: #E5E4E2;
+    border-radius: 0;
+}
+
+.container-fluid {
+    background-color: white;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 70%;
+    min-height:37rem;
+}
+.sidenav {
+    margin-top: 2rem;
+    padding: 0;
+    list-style: none;
+}
+
+ul {
+    margin-block-start: 0;
+}
+
+
+.nav-item {
+    list-style: none;
+}
+
+img {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.15;
+    height: 100%
+}
+
+
+@media screen and (max-width: 500px) {
+
+    body {
+    background-image: none;
+    background-color: white;
+    background-size: cover;
+    }
+
+   .jumbotron {
+        align: center;
+        background-color: darkorange;
+        color: #E5E4E2;
+   }
+   
+   .jumbotron h1 {
+            font-size: 1.35rem;
+   }
+
+    .jumbotron h3 {
+        font-size: 1rem;
+   }
+
+    .container-fluid {
+        background-color: white;
+        margin:  0 auto;
+        width:100%
+    }
+
+    .sidenav {
+        margin-top: 0;
+        line-height: 1.4;
+        padding: 0;
+        list-style: none;
+    }
+}
